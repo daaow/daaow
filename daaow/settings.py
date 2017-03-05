@@ -25,12 +25,15 @@ SECRET_KEY = '_m^icqe^+c=o+h9$jpzi27m#4#6&f==pm&pp31n4t3euvso7k5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['10.21.17.122', 'localhost', '127.0.0.1']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'material',
+    'material.admin',
+    'score.apps.ScoreConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
