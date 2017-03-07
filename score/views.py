@@ -27,7 +27,6 @@ def ulogin(request):
             )
 
             login_info = stu.login()
-            print(login_info)
             if login_info.get('status'):
                 # login(request, user)
                 return render(request, 'score/index.html',

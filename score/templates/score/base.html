@@ -1,0 +1,57 @@
+{% block doc %}
+<!DOCTYPE html>
+<html{% block html_attribs %}{% endblock html_attribs %}>
+  {% block html %}
+  <head>
+    {% block head %}
+    <title>{% block title %}{{ title }}{% endblock %}</title>
+
+{% block metas %}
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+        crossorigin="anonymous">
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+    <meta name="viewport" content="width=device-width, inital-scale=1.0">
+    {% include 'material/includes/material_js.html' %}
+    {% include 'material/includes/material_css.html' %}
+    {% endblock metas %}
+
+    {% block hscript %}
+    <script>
+        function side()
+        {
+            $(".button-collapse").sideNav();
+            $('.carousel.carousel-slider').carousel({full_width: true});
+            $(document).ready(function() {
+                $('select').material_select();
+                $('.tooltipped').tooltip({delay: 50});
+            });
+        }
+    </script>
+    {% endblock hscript %}
+
+    {% endblock head %}
+  </head>
+
+  <body>
+    {% block body %}
+    {% block navbar %}
+    {% endblock navbar %}
+    {% block content %}
+    {% endblock content %}
+
+    {% block scripts %}
+    <script
+        src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+        crossorigin="anonymous">
+    </script>
+    {% endblock scripts %}
+    {% endblock body %}
+    {% block footer %}
+    {% endblock %}
+  </body>
+  {% endblock html %}
+</html>
+{% endblock doc %}

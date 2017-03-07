@@ -1,15 +1,16 @@
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>test</title>
-  </head>
-  <body>
-    {{ text }}
-    <form action="/login/" method="post">
-      {% csrf_token %}
-      {{ form }}
-      <input type="submit" value="Submit" />
-    </form>
-  </body>
-</html>
+{% extends "score/base.html" %}
+{% load material_form %}
 
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="container">
+<form action="{% url 'score:login' %}" method="POST">
+  {% csrf_token %}
+  {% form form=form %}{% endform %}
+  <button type="submit" name="_submit" class="btn">
+    登录
+  </button>
+</form>
+</div>
+{% endblock %}
