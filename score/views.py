@@ -35,7 +35,7 @@ def ulogin(request):
                 context = {
                     'text': login_info.get('info')
                 }
-                return HttpResponse(login_info.get('info'))
+                return render(request, 'score/info.html',{'form':HttpResponse(login_info.get('info'))})
         else:
             form = LoginForm()
             return render(request, 'score/login.html', {'form': form})
