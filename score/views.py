@@ -29,13 +29,13 @@ def ulogin(request):
             login_info = stu.login()
             if login_info.get('status'):
                 # login(request, user)
-                return render(request, 'score/index.html',
+                return render(request, 'score/info.html',
                               {'text': stu.get_score()})
             else:
                 context = {
                     'text': login_info.get('info')
                 }
-                return render(request, 'score/info.html',{'form':HttpResponse(login_info.get('info'))})
+                return HttpResponse(login_info.get('info'))
         else:
             form = LoginForm()
             return render(request, 'score/login.html', {'form': form})
