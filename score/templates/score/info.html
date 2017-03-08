@@ -1,19 +1,56 @@
-{% extends "score/base.html" %}
+{% extends "admin/base.html" %}
+{% load material_form admin_static material_admin i18n %}
 
-{% block title %}Score{% endblock %}
+{% block title %}登录{% endblock %}
+
+{% block sidenav_header %}
+<li>
+    <div class="userView">
+        <img class="background" src="{% static 'material/imgs/sidenav.svg' %}">
+        <a href="#"><img class="circle" src="{% static 'material/imgs/user.png' %}"></a>
+        <span class="white-text name">{{ "未登录"|title }}</span>
+    </div>
+</li>
+{% endblock %}
+
+{% block sidenav_items %}
+{% if site_url %}
+{% block back_link %}<li class="no-padding"><a class="collapsible-header" href={{ site_url }}><i class="material-icons">arrow_back</i>{% trans 'View site' %}</a></li>{% endblock %}
+{% endif %}
+<li>
+    <ul class="collapsible collapsible-accordion">
+        <li>
+            <a class="collapsible-header"><i class="material-icons">group_work</i>关于</a>
+            <div class="collapsible-body">
+                <ul>
+                    <li>
+                        <a href="/about">关于我们</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/daaow/daaow">Fork Me On GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</li>
+{% endblock %}
+
+{% block brand-logo %}LOGO{% endblock %}
+
+{% block userlinks %}
+{# 顶栏右侧可添加链接 #}
+{% endblock %}
 
 
 {% block content %}
-
-{% block navbar %}
-<nav>
-<div class="nav-wrapper">
-  <a herf="#" class="brand-logo right">Logo</a>
-  <ul id="nav-mobile" class="left hide-on-med-and-down">
-    <li><a href="r'login/#info-score">Score</a></li>
-  </ul>
+<div class="container">
+    <form action="{% url 'score:login' %}" method="POST">
+    {% csrf_token %}
+    {% form form=form %}{% endform %}
+    <button type="submit" name="_submit" class="btn">
+        登录
+    </button>
+    </form>
 </div>
-</nav>
-{% endblock navbar %}
-<div id="info-score"></div>
-{% endblock content %}
+{% endblock %}

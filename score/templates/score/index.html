@@ -1,1 +1,22 @@
-{{ text }}
+{% extends 'score/base.html' %}
+
+{% block content %}
+<style type="text/css">
+    .chip {margin-top: 5px;}
+    span.badge {line-height:35px;}
+</style>
+{# TODO #}
+{# 根据 tag 判断显示页面,默认全部成绩 #}
+
+<ul class="collapsible" data-collapsible="accordion">
+{% for lesson in request.session.score.lessons %}
+  <li>
+    <div class="collapsible-header"><span class="chip teal lighten-2 badge">{{ lesson.2 }}</span>{{ lesson.1 }}</div>
+    <div class="collapsible-body">
+        <div class="chip">{{lesson.4}}{{lesson.5}}</div>
+        <div class="chip">{{lesson.3}}学分</div>
+        <div class="chip">{{lesson.6}}</div>
+    </div>
+  </li>
+{% endfor %}
+{% endblock %}
