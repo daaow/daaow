@@ -11,6 +11,9 @@
         <a href="#">
             <span class="white-text name">{{ request.session.info.name|title }}</span>
         </a>
+        <a href="#">
+            <span class="white-text">学号：{{ request.session.info.student_id }}</span>
+        </a>
         {% else %}
         <a href="/score/">
         <span class="white-text name">{{ "未登录"|title }}</span>
@@ -73,7 +76,7 @@
 {% block brand-logo %}LOGO{% endblock %}
 
 {% block userlinks %}
-{% if login %}
+{% if request.session.login %}
 <li><a href="/logout/" data-turbolinks="false"><i class="material-icons right">exit_to_app</i>退出登录</a></li>
 {% endif %}
 {# 顶栏右侧可添加链接 #}

@@ -9,14 +9,18 @@
 {# 根据 tag 判断显示页面,默认全部成绩 #}
 
 <ul class="collapsible" data-collapsible="accordion">
+    <li>
+        <div class="collapsible-header"><i class="material-icons">assessment</i>信息总览</div>
+        <div class="collapsible-body"><p>共 {{request.session.score.nums}} 门课程<br/>总学分：{{request.session.score.credit}}<br/>平均分: {{request.session.score.average}}</p></div>
+    </li>
 {% for lesson in request.session.score.lessons %}
-  <li>
-    <div class="collapsible-header"><span class="chip teal lighten-2 badge">{{ lesson.2 }}</span>{{ lesson.1 }}</div>
-    <div class="collapsible-body">
-        <div class="chip">{{lesson.4}}{{lesson.5}}</div>
-        <div class="chip">{{lesson.3}}学分</div>
-        <div class="chip">{{lesson.6}}</div>
-    </div>
-  </li>
+    <li>
+        <div class="collapsible-header"><span class="chip teal lighten-2 badge">{{ lesson.2 }}</span>{{ lesson.1 }}</div>
+        <div class="collapsible-body">
+            <div class="chip">{{lesson.4}}{{lesson.5}}</div>
+            <div class="chip">{{lesson.3}}学分</div>
+            <div class="chip">{{lesson.6}}</div>
+        </div>
+    </li>
 {% endfor %}
 {% endblock %}
