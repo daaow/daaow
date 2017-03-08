@@ -4,9 +4,10 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.template import RequestContext
+from django.contrib import messages
 
 from .forms import LoginForm
-from .utils import create_stu
+from .utils import create_stu, info_to_json
 
 
 def index(request):
@@ -27,36 +28,47 @@ def ulogin(request):
             )
             login_info = stu.login()
             if login_info.get('status'):
-                request.session['info'] = stu.get_info()
+                request.session['info'] = info_to_json(stu.get_info())
                 request.session['score'] = stu.get_score()
+                # TODO:
+                # - score API 挂科记录接口待添加，暂时设置为False
+                # - CET-4, CET-6 接口
+                request.session['score']['npass'] = False
                 request.session['login'] = True
                 # request.session['elec'] = stu.elec # 选修课
 
-                return render(request, 'score/index.html',
-                              {'text': stu.get_info()})
+                messages.success(request, '登录成功')
+                return render(request, 'score/index.html')
             else:
-                context = {
-                    'text': login_info.get('info')
-                }
-                return HttpResponse(login_info.get('info'))
+                messages.warning(request, login_info.get('info'))
+                return render(request, 'score/login.html', {'form': form})
         else:
-            # TODO:
-            # - django 消息框架
             form = LoginForm()
             return render(request, 'score/login.html', {'form': form})
-    else:
+    elif request.method == 'GET':
         if request.session.get('login') is True:
-            return render(
-                request,
-                'score/index.html',
-                {
-                    'text': request.session.get('info')
-                })
-        # TODO:
-        # - 从缓存系统获取session
+            tag = request.GET.get('tag')
+            if tag == 'npass':
+                return render(
+                    request,
+                    'score/index.html',
+                    {
+                        'tag': 'npass'
+                    }
+                )
+            else:
+                return render(
+                    request,
+                    'score/index.html',
+                    {
+                        'tag': 'all'
+                    }
+                )
         else:
             form = LoginForm()
             return render(request, 'score/login.html', {'form': form})
 
-# TODO:
-# - 用户登出 requests.sesssion.flush()
+def ulogout(request):
+    request.session.flush()
+    messages.success(request, "已登出")
+    return HttpResponseRedirect('/score/')

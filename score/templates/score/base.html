@@ -1,57 +1,83 @@
-{% block doc %}
-<!DOCTYPE html>
-<html{% block html_attribs %}{% endblock html_attribs %}>
-  {% block html %}
-  <head>
-    {% block head %}
-    <title>{% block title %}{{ title }}{% endblock %}</title>
+{% extends "admin/base.html" %}
+{% load material_form admin_static material_admin i18n %}
 
-{% block metas %}
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"
-        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-        crossorigin="anonymous">
-    </script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
-    <meta name="viewport" content="width=device-width, inital-scale=1.0">
-    {% include 'material/includes/material_js.html' %}
-    {% include 'material/includes/material_css.html' %}
-    {% endblock metas %}
+{% block sidenav_header %}
+<li>
+    <div class="userView">
+        <img class="background" src="{% static 'material/imgs/sidenav.svg' %}">
+        <a href="#"><img class="circle" src="{% static 'material/imgs/user.png' %}"></a>
+        {% block student_info %}
+        {% if request.session.login %}
+        <a href="#">
+            <span class="white-text name">{{ request.session.info.name|title }}</span>
+        </a>
+        <a href="#">
+            <span class="white-text">学号：{{ request.session.info.student_id }}</span>
+        </a>
+        {% else %}
+        <a href="/score/">
+        <span class="white-text name">{{ "未登录"|title }}</span>
+        </a>
+        {% endif %}
+        {% endblock %}
+    </div>
+</li>
+{% endblock %}
 
-    {% block hscript %}
-    <script>
-        function side()
-        {
-            $(".button-collapse").sideNav();
-            $('.carousel.carousel-slider').carousel({full_width: true});
-            $(document).ready(function() {
-                $('select').material_select();
-                $('.tooltipped').tooltip({delay: 50});
-            });
-        }
-    </script>
-    {% endblock hscript %}
+{% block sidenav_items %}
+{% if site_url %}
+{% block back_link %}<li class="no-padding"><a class="collapsible-header" href={{ site_url }}><i class="material-icons">arrow_back</i>{% trans 'View site' %}</a></li>{% endblock %}
+{% endif %}
+{% if request.session.login %}
+<li>
+    <ul class="collapsible collapsible-accordion">
+        <li>
+            <a class="collapsible-header"><i class="material-icons">list</i>成绩信息</a>
+            <div class="collapsible-body">
+                <ul>
+                    <li>
+                        <a href="{% url 'score:score' %}?tab=all">我的成绩单</a>
+                    </li>
+                    <li>
+                        {% if request.session.score.npass %}
+                        <a href="{% url 'score:score' %}?tag=npass">挂科！</a>
+                        {% else %}
+                        <a href="#">成绩超棒，没有挂科</a>
+                        {% endif %}
+                    </li>
+                    <li>
+                        <a href="{% url 'score:score' %}?tab=all">四六级</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</li>
+{% endif %}
+<li>
+    <ul class="collapsible collapsible-accordion">
+        <li>
+            <a class="collapsible-header"><i class="material-icons">group_work</i>关于</a>
+            <div class="collapsible-body">
+                <ul>
+                    <li>
+                        <a href="/about">关于我们</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/daaow/daaow">Fork Me On GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</li>
+{% endblock %}
 
-    {% endblock head %}
-  </head>
+{% block brand-logo %}LOGO{% endblock %}
 
-  <body>
-    {% block body %}
-    {% block navbar %}
-    {% endblock navbar %}
-    {% block content %}
-    {% endblock content %}
-
-    {% block scripts %}
-    <script
-        src="https://code.jquery.com/jquery-2.2.4.min.js"
-        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-        crossorigin="anonymous">
-    </script>
-    {% endblock scripts %}
-    {% endblock body %}
-    {% block footer %}
-    {% endblock %}
-  </body>
-  {% endblock html %}
-</html>
-{% endblock doc %}
+{% block userlinks %}
+{% if request.session.login %}
+<li><a href="/logout/" data-turbolinks="false"><i class="material-icons right">exit_to_app</i>退出登录</a></li>
+{% endif %}
+{# 顶栏右侧可添加链接 #}
+{% endblock %}

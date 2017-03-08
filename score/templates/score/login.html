@@ -1,16 +1,18 @@
-{% extends "admin/base.html" %}
-{% load material_form %}
+{% extends "score/base.html" %}
+{% load material_form admin_static material_admin i18n %}
 
-{% block title %}Login{% endblock %}
+{% block title %}登录{% endblock %}
+
+{% block brand-logo %}LOGO{% endblock %}
 
 {% block content %}
-<div class="container">
-<form action="{% url 'score:login' %}" method="POST">
-  {% csrf_token %}
-  {% form form=form %}{% endform %}
-  <button type="submit" name="_submit" class="btn">
-    登录
-  </button>
-</form>
+<div class="container" style="margin-top: 10%">
+    <form action="/score/" method="POST">
+    {% csrf_token %}
+    {% form form=form %}{% endform %}
+    <button type="submit" name="_submit" class="btn">
+        登录
+    </button>
+    </form>
 </div>
 {% endblock %}
