@@ -60,3 +60,10 @@ def ulogin(request):
 
 # TODO:
 # - 用户登出 requests.sesssion.flush()
+
+def indexshow(request):
+    context = {
+        'text': "helloworld",
+    }
+    return render(request, 'score/index.html', context)
+
