@@ -1,7 +1,7 @@
 {% extends "score/base.html" %}
 {% load material_form admin_static material_admin i18n %}
 
-{% block title %}登录{% endblock %}
+{% block title %}{% if request.session.login %}教务处Plus{% else %}登录{% endif %}{% endblock %}
 
 {% block brand-logo %}LOGO{% endblock %}
 

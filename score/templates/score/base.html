@@ -1,6 +1,8 @@
 {% extends "admin/base.html" %}
 {% load material_form admin_static material_admin i18n %}
 
+{% block title %}{% if request.session.login %}教务处Plus{% endif %}{% endblock %}
+
 {% block sidenav_header %}
 <li>
     <div class="userView">
@@ -50,6 +52,14 @@
                     </li>
                 </ul>
             </div>
+        </li>
+    </ul>
+</li>
+<li>
+<li>
+    <ul class="collapsible collapsible-accordion">
+        <li>
+            <a class="collapsible-header" href="{% url 'score:logout' %}"><i class="material-icons">exit_to_app</i>退出登录</a>
         </li>
     </ul>
 </li>

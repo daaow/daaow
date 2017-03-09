@@ -24,10 +24,12 @@ def ulogin(request):
             login_info = stu.login()
             if login_info.get('status'):
                 request.session['info'] = info_to_json(stu.get_info())
-                request.session['score'] = stu.get_score()
+                score_pre = stu.get_score()
+                score_pre['lessons'].sort(key=lambda x: x[4], reverse=True)
                 # TODO:
                 # - score API 挂科记录接口待添加，暂时设置为False
                 # - CET-4, CET-6 接口
+                request.session['score'] = score_pre
                 request.session['score']['npass'] = False
                 request.session['login'] = True
                 # request.session['elec'] = stu.elec # 选修课
