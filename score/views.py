@@ -69,3 +69,6 @@ def ulogout(request):
     request.session.flush()
     messages.success(request, "已登出")
     return HttpResponseRedirect('/score/')
+
+def about(request):
+    return render(request, 'score/about.html')
