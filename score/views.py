@@ -11,7 +11,7 @@ from .utils import create_stu, info_to_json
 
 
 def index(request):
-    return render(request, 'score/index.html')
+    return render(request, 'score/home.html')
 
 def ulogin(request):
     if request.method == 'POST':
@@ -45,11 +45,10 @@ def ulogin(request):
     elif request.method == 'GET':
         if request.session.get('login') is True:
             lessons = request.session.get('score').get('lessons')
-            tag = request.GET.get('tag')
+            tag = request.GET.get('tag', 'default')
             tags = {
                 'npass': lessons,
-                'cet': lessons[-2:],
-                'all': lessons,
+                'cet': list(filter(lambda x: '等级考试' in x, lessons)),
                 'default':lessons
             }
             return render(
