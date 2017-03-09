@@ -11,12 +11,7 @@ from .utils import create_stu, info_to_json
 
 
 def index(request):
-    context = {
-        'text': "{}".format(
-            request.session.get('info')
-        )
-    }
-    return render(request, 'score/index.html', context)
+    return render(request, 'score/index.html')
 
 def ulogin(request):
     if request.method == 'POST':
@@ -49,23 +44,21 @@ def ulogin(request):
             return render(request, 'score/login.html', {'form': form})
     elif request.method == 'GET':
         if request.session.get('login') is True:
+            lessons = request.session.get('score').get('lessons')
             tag = request.GET.get('tag')
-            if tag == 'npass':
-                return render(
-                    request,
-                    'score/index.html',
-                    {
-                        'tag': 'npass'
-                    }
-                )
-            else:
-                return render(
-                    request,
-                    'score/index.html',
-                    {
-                        'tag': 'all'
-                    }
-                )
+            tags = {
+                'npass': lessons,
+                'cet': lessons[-2:],
+                'all': lessons,
+                'default':lessons
+            }
+            return render(
+                request,
+                'score/index.html',
+                {
+                    'lessons': tags.get(tag, lessons),
+                }
+            )
         else:
             form = LoginForm()
             return render(request, 'score/login.html', {'form': form})
