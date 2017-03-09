@@ -11,12 +11,7 @@ from .utils import create_stu, info_to_json
 
 
 def index(request):
-    context = {
-        'text': "{}".format(
-            request.session.get('info')
-        )
-    }
-    return render(request, 'score/index.html', context)
+    return render(request, 'score/home.html')
 
 def ulogin(request):
     if request.method == 'POST':
