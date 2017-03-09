@@ -12,7 +12,11 @@
     {% if request.session.login %}
     <li>
         <div class="collapsible-header"><i class="material-icons">assessment</i>信息总览</div>
-        <div class="collapsible-body"><p>共 {{request.session.score.nums}} 门课程<br/>总学分：{{request.session.score.credit}}<br/>平均分: {{request.session.score.average}}</p></div>
+        <div class="collapsible-body">
+        <div class="chip">共 {{request.session.score.nums}} 门课程</div>
+        <div class="chip">总学分：{{request.session.score.credit}}</div>
+        <div class="chip">平均分: {{request.session.score.average}}</div>
+        </div>
     </li>
     {% endif %}
     {% for lesson in lessons %}

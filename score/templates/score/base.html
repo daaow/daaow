@@ -2,6 +2,8 @@
 {% load material_form admin_static material_admin i18n %}
 {% load static %}
 
+{% block favicon %}<link href="{% static 'score/favicon.ico' %}" rel="shorcut icon">{% endblock %}
+
 {% block title %}{% if request.session.login %}教务Lite{% endif %}{% endblock %}
 
 {% block sidenav_header %}
@@ -85,7 +87,7 @@
 {% endblock %}
 
 {% block page_title %}
-<a href="/" class="page-title">{% block brand-logo %}LOGO{% endblock %}</a>
+<a href="/" class="page-title">{% block brand-logo %}Daaow Lite{% endblock %}</a>
 {% endblock %}
 
 {% block userlinks %}
