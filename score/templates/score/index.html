@@ -17,11 +17,12 @@
     {% endif %}
     {% for lesson in lessons %}
     <li>
-        <div class="collapsible-header"><span class="chip teal lighten-2 badge">{{ lesson.2 }}</span>{{ lesson.1 }}</div>
+        <div class="collapsible-header">{% if lesson.7 > "60" %}<span class="chip teal lighten-2 badge">{% else %}<span class="chip red lighten-3 badge">{% endif %}{{ lesson.7 }}</span>{{ lesson.6 }}</div>
         <div class="collapsible-body">
-            <div class="chip">{{lesson.4}}{{lesson.5}}</div>
-            <div class="chip">{{lesson.3}}学分</div>
-            <div class="chip">{{lesson.6}}</div>
+            <div class="chip">{{lesson.1}}{{lesson.2}}</div>
+            <div class="chip">{{lesson.4}}学分</div>
+            <div class="chip">{{lesson.3}}学时</div>
+            <div class="chip">{{lesson.5}}</div>
         </div>
     </li>
 {% endfor %}

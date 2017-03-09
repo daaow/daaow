@@ -25,17 +25,20 @@ def ulogin(request):
             if login_info.get('status'):
                 request.session['info'] = info_to_json(stu.get_info())
                 score_pre = stu.get_score()
-                score_pre['lessons'].sort(key=lambda x: x[4], reverse=True)
+                score_pre['lessons'].sort(key=lambda x: x[1], reverse=True)
                 # TODO:
                 # - score API 挂科记录接口待添加，暂时设置为False
                 # - CET-4, CET-6 接口
                 request.session['score'] = score_pre
-                request.session['score']['npass'] = False
                 request.session['login'] = True
-                # request.session['elec'] = stu.elec # 选修课
+                request.session['npass'] = stu.get_npass_lesson()
+                # request.session['elec'] = stu.get_elec # 选修课
 
                 messages.success(request, '登录成功')
-                return render(request, 'score/index.html')
+                return render(request, 'score/index.html',
+                              {'lessons':request.session.get('score').get('lessons'),
+                               'npass': request.session.get('npass').get('nums')}
+                              )
             else:
                 messages.warning(request, login_info.get('info'))
                 return render(request, 'score/login.html', {'form': form})
@@ -47,7 +50,7 @@ def ulogin(request):
             lessons = request.session.get('score').get('lessons')
             tag = request.GET.get('tag', 'default')
             tags = {
-                'npass': lessons,
+                'npass': request.session.get('npass').get('npass'),
                 'cet': list(filter(lambda x: '等级考试' in x, lessons)),
                 'default':lessons
             }

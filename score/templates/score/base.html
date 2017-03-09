@@ -42,8 +42,8 @@
                         <a href="{% url 'score:score' %}">我的成绩单</a>
                     </li>
                     <li>
-                        {% if request.session.score.npass %}
-                        <a href="{% url 'score:score' %}?tag=npass">挂科！</a>
+                        {% if request.session.npass.nums > 0 %}
+                        <a href="{% url 'score:score' %}?tag=npass" class="red-text">挂科！</a>
                         {% else %}
                         <a href="#">成绩超棒，没有挂科</a>
                         {% endif %}
