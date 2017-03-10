@@ -1,9 +1,11 @@
+{% load static %}
 <html>
   <head>
     <title>教务Lite</title>
     <!-- Compiled and minified CSS -->
     <link href="/static/score/favicon.ico" rel="shorcut icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+    <link rel="stylesheet" href="{% static 'score/style.css' %}">
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
@@ -14,6 +16,7 @@
     background-size: cover;
     background-repeat: round;
     background-image: url('https://i1.wp.com/thezinx.com/wp-content/uploads/md-2.png');">
+    <div class="login"><a href="/score/" class="login-text">Login In</a></div>
   </body>
 
 </html>

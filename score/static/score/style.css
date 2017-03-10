@@ -5,3 +5,19 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
   }
+
+.login {
+  position: fixed;
+  width: 100%;
+  bottom: 40px;
+}
+
+a {
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+  font-style: italic;
+  font-weight: lighter;
+  font-size: 42px;
+  color: gray;
+}

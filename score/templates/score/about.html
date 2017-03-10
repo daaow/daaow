@@ -1,4 +1,5 @@
 {% extends "score/base.html" %}
+{% load static %}
 
 {% block favicon %}<link href="{% static 'score/favicon.ico' %}" rel="shorcut icon">{% endblock %}
 
@@ -11,7 +12,7 @@
       <div class="container" style="margin:0px 20px 20px 20px">
       <div class="card-content black-text">
         <h3>关于我</h3>
-<blockquote><p>这个小站是由理学院 <a href="https://github.com/x1ah">@x1ah</a> 和 <a href="https://github.com/350535629">@Baymax Chuang</a> 共同码成，源码托管于 <a href="https://github.com/daaow/daaow">GitHub</a>，后端基于 Python + Django，前端基于 Material Design 框架。</p></blockquote>
+        <blockquote><p>这个小站是由理学院 <a href="https://github.com/x1ah">@x1ah</a> 和 <a href="https://github.com/350535629">@Baymax Chuang</a> 共同码成，<code>daaow<code> 意为 <code>Department of Academic Affairs Official Website<code> 源码托管于 <a href="https://github.com/daaow/daaow">GitHub</a>，后端基于 Python + Django，以及 Memcached 会话缓存，前端基于 Material Design 风格的 <a href="http://materializecss.com">Materialize</a> 框架。</p></blockquote>
 
 <h5>说明</h5>
 
