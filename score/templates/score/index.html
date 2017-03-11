@@ -28,13 +28,13 @@
             <div class="chip">教师: {{lesson.3}}</div>
         </div>
         {% elif cet %}
-        <div class="collapsible-header">{% if lesson.5 > "60" %}<span class="chip teal lighten-2 badge">{% else %}<span class="chip red lighten-3 badge">{% endif %}{{ lesson.5 }}</span>{{ lesson.4 }}</div>
+        <div class="collapsible-header">{% if lesson.5 > "600" %}<span class = "chip red lighten-3 badge" >{% elif lesson.5 > "425" %}<span class="chip teal lighten-2 badge">{% else %}<span class="chip grey lighten-1 badge">{% endif %}{{ lesson.5 }}</span>{{ lesson.4 }}</div>
         <div class="collapsible-body">
             <div class="chip">{{lesson.0}}</div>
             <div class="chip">{{lesson.3}}</div>
         </div>
         {% else %}
-        <div class="collapsible-header">{% if lesson.7 > "60" %}<span class="chip teal lighten-2 badge">{% else %}<span class="chip red lighten-3 badge">{% endif %}{{ lesson.7 }}</span>{{ lesson.6 }}</div>
+        <div class="collapsible-header">{% if lesson.7 == "100" %}<span class = "chip red lighten-3 badge" >{% elif lesson.7 > "60" %}<span class="chip teal lighten-2 badge">{% else %}<span class="chip grey lighten-1 badge">{% endif %}{{ lesson.7 }}</span>{{ lesson.6 }}</div>
         <div class="collapsible-body">
             <div class="chip">{{lesson.1}}{{lesson.2}}</div>
             <div class="chip">{{lesson.4}}学分</div>
