@@ -7,7 +7,7 @@ from django.template import RequestContext
 from django.contrib import messages
 
 from .forms import LoginForm
-from .utils import create_stu, info_to_json
+from .utils import create_stu, info_to_json, weighted_average
 
 
 def index(request):
@@ -30,11 +30,13 @@ def ulogin(request):
                 request.session['login'] = True
                 request.session['npass'] = stu.get_npass_lesson()
                 request.session['elec'] = stu.get_elective() # 选修课
+                request.session['weight'] = weighted_average(score_pre.get('lessons'))
 
                 messages.success(request, '登录成功')
                 return render(request, 'score/index.html',
                               {'lessons':request.session.get('score').get('lessons'),
-                               'npass': request.session.get('npass').get('nums')}
+                               'npass': request.session.get('npass').get('nums')
+                               }
                               )
             else:
                 messages.warning(request, login_info.get('info'))
