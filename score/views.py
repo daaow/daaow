@@ -3,16 +3,20 @@ import pickle
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
+from django.views.decorators.cache import cache_page
 from django.template import RequestContext
+from django.core.cache import cache
 from django.contrib import messages
 
 from .forms import LoginForm
 from .utils import create_stu, info_to_json
 
 
+@cache_page(60 * 15)
 def index(request):
     return render(request, 'score/home.html')
 
+@cache_page(60 * 15)
 def ulogin(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -43,6 +47,7 @@ def ulogin(request):
             form = LoginForm()
             return render(request, 'score/login.html', {'form': form})
     elif request.method == 'GET':
+        cache.set('test', 'testvalue')
         if request.session.get('login') is True:
             lessons = request.session.get('score').get('lessons')
             tag = request.GET.get('tag', 'default')
@@ -65,10 +70,12 @@ def ulogin(request):
             form = LoginForm()
             return render(request, 'score/login.html', {'form': form})
 
+@cache_page(60 * 15)
 def ulogout(request):
     request.session.flush()
     messages.success(request, "已登出")
     return HttpResponseRedirect('/')
 
+@cache_page(60 * 15)
 def about(request):
     return render(request, 'score/about.html')

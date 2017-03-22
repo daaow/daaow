@@ -1,11 +1,13 @@
 {% extends "admin/base.html" %}
 {% load material_form admin_static material_admin i18n %}
 {% load static %}
+{% load cache %}
 
 {% block favicon %}<link href="{% static 'score/favicon.ico' %}" rel="shorcut icon">{% endblock %}
 
 {% block title %}{% if request.session.login %}教务Lite{% endif %}{% endblock %}
 
+{% cache 1000 sidebar %}
 {% block sidenav_header %}
 <li>
     <div class="userView">
@@ -28,6 +30,7 @@
     </div>
 </li>
 {% endblock %}
+{% endcache %}
 
 {% block sidenav_items %}
 {% if site_url %}
@@ -89,9 +92,11 @@
 </li>
 {% endblock %}
 
+{% cache 1000 brandlogo %}
 {% block page_title %}
 <a href="/" class="page-title">{% block brand-logo %}Daaow Lite{% endblock %}</a>
 {% endblock %}
+{% endcache %}
 
 {% block userlinks %}
 {% if request.session.login %}

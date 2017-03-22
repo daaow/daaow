@@ -52,6 +52,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+MIDDLEWARE_CLASSSES = (
+    'django.middleware.cache.UpdateCacheMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
+)
+
 ROOT_URLCONF = 'daaow.urls'
 
 TEMPLATES = [
@@ -126,6 +132,10 @@ CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
         'LOCATION': '127.0.0.1:11211',
-        'SESSION_ENGINE': 'django.contrib.sessions.backends.cached_db'
+        'SESSION_ENGINE': 'django.contrib.sessions.backends.cached_db',
+        'TIMEOUT': 100,
+        'OPTIONS': {
+            'MAX_ENTRIES': 1000
+        }
     }
 }
