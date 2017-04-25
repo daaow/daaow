@@ -1,6 +1,6 @@
 beautifulsoup4==4.5.3
 bs4==0.0.1
-cumtbscore==0.3.4
+cumtbscore==0.4.0
 Django==1.10.6
 django-material==0.12.5
 prettytable==0.7.2
