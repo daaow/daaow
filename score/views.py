@@ -1,4 +1,5 @@
-import pickle
+#!/usr/bin/env python
+# coding: utf-8
 
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
